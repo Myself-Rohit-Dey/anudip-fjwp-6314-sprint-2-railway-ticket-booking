@@ -10,6 +10,6 @@ Currently, two official plugins are available:
 --->
 
 ## Trsin-Ticket-Management:
-Website : [traintm.netlify.app](https://traintm.netlify.app)🚆
+Website : [trainticketm.netlify.app](https://trainticketm.netlify.app)🚆
 
 ![Web capture_14-1-2024_163110_localhost](https://github.com/Myself-Rohit-Dey/Train-Ticket-Management/assets/75258734/6c415d21-57f7-4f76-802d-c6288222a5b5)
