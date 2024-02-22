@@ -30,8 +30,10 @@ const Header = () => {
   const navigate = useNavigate();
   const {user, dispatch} = useContext(AuthContext) // for Auth
   const logout = () => {
-    dispatch({type:'LOGOUT'})
-    navigate('/home')
+    dispatch({type:'LOGOUT'});
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    navigate('/')
   } //for auth
 
   const[act,setAct] = useState('')
@@ -103,16 +105,16 @@ const Header = () => {
             <>
               <div className='atb flex'>
               <span className='user' onClick={toggleProfilePopup}>
-                {user.firstName + user.lastName}
+                {user.name}
               </span>
               {showProfilePopup && (
                 <div className="profile-popup">
                   {/* Your profile details go here */}
-                  <div>Username: {user.firstName + user.lastName}</div>
+                  <div><b>{user.roles}</b></div>
+                  <div>Username: {user.name}</div>
                   <div>Email: {user.email}</div>
-                  
                     <button className='btn' onClick={logout}>Logout</button>
-                    <button className='btn delete' onClick={deletePassenger}>Delete</button>
+                    {/* <button className='btn delete' onClick={deletePassenger}>Delete</button> */}
     
                 </div>
               )}
@@ -141,10 +143,12 @@ const Header = () => {
           <ul className="menu flex ">
           {navLinks.map((Links) => (
           <li key={Links.id} className={`listItem ${act === Links.title ? 'active' : 'inactive'}`} onClick={()=>{removeNavBar();setAct(Links.title);scrollToSection(Links.id);}} >
-            <Link to={`/home/#${Links.id}`}>{Links.title}</Link>
+            <Link to={`/#${Links.id}`}>{Links.title}</Link>
           </li>
           ))}
-          <li className="listItem"><Link to="/trains">Train</Link></li>
+          <li className="listItem"><Link to="/trains">Trains</Link></li>
+          <li className="listItem"><Link to="/pnr">PNR</Link></li>
+          {user && user.roles.includes("ADMIN") && (<li className="listItem"><Link to="/admin/dashboard">Dashboard</Link></li>)}
           </ul>
           <button onClick={removeNavBar} className="btn flex btnOne">
             <a href="https://mail.google.com/mail/#inbox/?compose=DmwnWrRlRQkzvCPsNRwRhkqnmlCRdHzRcRQqHsQQLcfDdxrNKDwwflQCfbfrLGWmpMDTKRmfxrVQ" target='_blank'>mail</a>
